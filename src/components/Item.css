@@ -1,0 +1,33 @@
+.Item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 3px;
+}
+
+.Item:nth-child(even) {
+    background-color: whitesmoke;
+}
+
+.Item span:first-of-type {
+    text-align: left;
+}
+
+.Item button {
+    height: 2em
+}
+
+.Item.Item-selected {
+    background-color: peachpuff;
+}
+
+.Item-buttons-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.Item-text-completed {
+    text-decoration: line-through;
+}

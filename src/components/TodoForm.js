@@ -1,29 +1,22 @@
-import { useState } from "react"
+import { useCallback } from "react"
+import "./TodoForm.css"
 
 function TodoForm(props) {
-    const [inputValue, setInputValue] = useState('')
+    const onChange = useCallback((e) => {
+        props.setInputValue(e.target.value)
+    }, [props])
 
-    const onChange = (e) => {
-        setInputValue(e.target.value)
-    }
-
-    const onClick = () => {
-        if (inputValue.trim().length > 0) {
-            props.onSubmit(inputValue)
-            setInputValue('')
-        }
-    }
-
-    const onKeyDown = (e) => {
+    const onKeyDown = useCallback((e) => {
         if (e.keyCode === 13) {
-            onClick()
+            props.onSubmit()
         }
-    }
+    }, [props])
 
     return (
-        <div>
-            <input type="text" value={inputValue} onChange={onChange} onKeyDown={onKeyDown} />
-            <button onClick={onClick}>Add</button>
+        <div className="TodoForm">
+            <input className="TodoForm-input" type="text" value={props.inputValue} onChange={onChange} onKeyDown={onKeyDown} rows='2' />
+            <button className="TodoForm-button" onClick={props.onSubmit}>{props.submitButtonName}</button>
+            {!!props.onCancel && <button className="TodoForm-button" onClick={props.onCancel}>Cancel</button>}
         </div>
     )
 }
